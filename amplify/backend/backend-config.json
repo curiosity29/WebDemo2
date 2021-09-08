@@ -1,6 +1,6 @@
 {
   "auth": {
-    "webdemo14b16e110": {
+    "webdemo11547e46d": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
@@ -21,6 +21,30 @@
           "SMS"
         ]
       }
+    }
+  },
+  "api": {
+    "notesapp": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 7,
+              "description": "demo"
+            }
+          },
+          "additionalAuthenticationProviders": []
+        }
+      }
+    }
+  },
+  "storage": {
+    "demobucket1": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
     }
   }
 }
