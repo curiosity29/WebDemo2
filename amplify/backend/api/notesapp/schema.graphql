@@ -4,3 +4,36 @@ type Note @model {
   description: String
   image: String
 }
+
+
+type Knowledge @model {
+  id: ID!
+  elementName: String
+  type: String
+  Date: String
+  rating: String
+  UserID: String
+
+  ownedBy: User @connection
+}
+
+type User @model {
+  id: ID!
+  userName: String
+  
+}
+
+
+type Course @model {
+  id: ID!
+  Name: String
+  rating: String
+
+  ownedBy: User @connection
+
+}
+
+type Preference @model {
+  id: ID!
+  Name: String
+}
