@@ -27,11 +27,11 @@ export default class CreateKnowledgePage extends React.Component {
                         <input type="text" className="form-control" name="name" onChange={this.handleChange} />
                     </div>
                     <div variant="Password">
-                        <label htmlFor="content">Password</label>
+                        <label htmlFor="content">content</label>
                         <input type="text" className="form-control" name="content" onChange={this.handleChange} />
                     </div>
                     <div variant="Password">
-                        <label htmlFor="type">Password</label>
+                        <label htmlFor="type">type</label>
                         <input type="text" className="form-control" name="type" onChange={this.handleChange} />
                     </div>
                     <div variant="Submit">
