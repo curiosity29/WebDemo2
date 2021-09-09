@@ -1,21 +1,22 @@
 import React from "react";
-import { history } from "../../_helpers/history";
 import 'bootstrap/dist/css/bootstrap.min.css';
-export default class KnowledgePage extends React.Component {
+export default class FindCoursePage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             error: null,
             isLoaded: false,
-            result: [],
-            data : " "
+            q: "",
+            result: null,
+            data: "",
         };
         this.componentDidMount();
+        this.handleChange = this.handleChange.bind(this);
     }
     componentDidMount() {
-        this.getKnowledgeList();
+        this.getCourseList();
     }
-    getKnowledgeList() {
+    getCourseList() {
         // fetch("https://api.example.com/items")
         //     .then(res => res.json())
         //     .then(
@@ -32,12 +33,11 @@ export default class KnowledgePage extends React.Component {
         //             });
         //         }
         //     )
-        this.setState()
         this.setState({
             isLoaded: true,
             result: [{
                 name: "Nam",
-                content: "Nhu qq",
+                summary: "Nhu qq",
                 tag: "Gay boy",
                 Type: "Word",
                 Rating: {
@@ -47,7 +47,7 @@ export default class KnowledgePage extends React.Component {
                 Link: "/sadas/sadas/sadas",
             }, {
                 name: "Nam1",
-                content: "Nhu qq1",
+                summary: "Nhu qq1",
                 tag: "Gay boy1",
                 Type: "Word1",
                 Rating: {
@@ -58,26 +58,30 @@ export default class KnowledgePage extends React.Component {
             }]
         })
     }
+    handleChange(e) {
+        const { name, value } = e.target;
+        this.setState({ [name]: value });
+    }
     render() {
-        const { error, isLoaded, result , data} = this.state;
+        const { error, isLoaded, q, result, data } = this.state;
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
             return <div>Loading...</div>;
         } else {
             return (
-                <div className="">
+                <div className="sadsa">
                     <input
                         onChange={this.handleChange}
-                        placeholder="preference"
+                        placeholder="Name course"
                         value={data}
                     />
+                    <button> Search</button> {/* search button de tim course */}
                     {result.map(item =>
                         <div className="border">
                             <div>{item.name}</div>
-                            <div>{item.content}</div>
+                            <div>{item.summary}</div>
                             <div>{item.Link}</div>
-                            <div>{item.Type}</div>
                             <div>{item.Rating.like}</div>
                             <div>{item.Rating.hate}</div>
                         </div>
