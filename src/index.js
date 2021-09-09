@@ -5,6 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 
+import App2 from './App2';
+
+
 import Amplify from 'aws-amplify';
 import config from './aws-exports';
 Amplify.configure(config);
@@ -12,7 +15,9 @@ Amplify.configure(config);
 
 ReactDOM.render(
   <React.StrictMode>
+    <App2 />
     <App />
+    
   </React.StrictMode>,
   document.getElementById('root')
 );

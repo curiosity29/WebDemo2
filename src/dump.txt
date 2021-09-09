@@ -1,0 +1,149 @@
+import React, { useState, useEffect } from 'react';
+import './App.css';
+import { API, Storage } from 'aws-amplify';
+import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
+
+
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+
+const initialFormState = {
+  elementName: '',
+  type: '',
+  Date: '',
+  rating: '',
+  UserID: ''
+}
+
+
+const listNotes = /* GraphQL */ `
+  query ListNotes(
+    $filter: ModelNoteFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listNotes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        elementName
+        type
+      }
+      nextToken
+    }
+  }
+`;
+
+
+
+const createNoteMutation = /* GraphQL */ `
+  mutation CreateNote(
+    $input: CreateNoteInput!
+    $condition: ModelNoteConditionInput
+  ) {
+    createNote(input: $input, condition: $condition) {
+      elementName
+      type
+    }
+  }
+`;
+
+export const deleteNoteMutation = /* GraphQL */ `
+  mutation DeleteNote(
+    $input: DeleteNoteInput!
+    $condition: ModelNoteConditionInput
+  ) {
+    deleteNote(input: $input, condition: $condition) {
+      elementName
+      type
+    }
+  }
+`;
+
+//const initialFormState = { name: '', description: '' }
+// const Header = () => {
+//   return (
+//     <Router>
+//       <Switch>
+//         <Route exact path="/">
+//           <App2 />
+//         </Route>
+//       </Switch>
+//     </Router>
+//   );
+// }
+function App2() {
+  const [notes, setNotes] = useState([]);
+  const [formData, setFormData] = useState(initialFormState);
+
+  useEffect(() => {
+    fetchNotes();
+  }, []);
+
+
+  async function onChange(e) {
+    fetchNotes();
+  }
+
+
+
+
+  async function fetchNotes() {
+    const apiData = await API.graphql({ query: listNotes });
+    const notesFromAPI = apiData.data.listNotes.items;
+    setNotes(notesFromAPI);
+  }
+
+
+
+
+
+  return (
+    <div className="App">
+      <h1>My anoter Notes App</h1>
+
+
+
+      
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <App2 />
+          </Route>
+        </Switch>
+      </Router>
+
+
+      <input
+        type="file"
+        onChange={onChange}
+      />
+
+
+      <input
+        onChange={e => setFormData({ ...formData, 'name': e.target.value })}
+        placeholder="Name"
+        value={formData.elementName}
+      />
+      <input
+        onChange={e => setFormData({ ...formData, 'description': e.target.value })}
+        placeholder="type"
+        value={formData.type}
+      />
+      <div style={{ marginBottom: 30 }}>
+
+
+        {
+          notes.map(note => (
+            <div key={note.id}>
+              <h2>{note.elementName}</h2>
+              <p>{note.type}</p>
+            </div>
+          ))
+        }
+
+
+      </div>
+    </div>
+  );
+}
+
+export default App2;
