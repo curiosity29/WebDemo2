@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 type Note @model {
   id: ID!
   name: String!
@@ -37,3 +38,128 @@ type Preference @model {
   id: ID!
   Name: String
 }
+=======
+type Course @model @key(name: "taohoc", fields: ["IDcourse", "Tencourse"]) {
+    IDcourse: Int!
+    Tencourse: String!
+    IDnguoitao: user @connection
+    IDnguoiquanli: user @connection
+    SonguoiDanghoc: Int!
+    NgayTao: AWSDateTime!
+    Tag: [tag] @connection(keyName: "tagCourse", fields: ["IDcourse"])
+}
+
+type Element
+    @model
+    @key(name: "baihocEle", fields: ["IDelement", "Tenelement", "Loai"])
+    @key(name: "cateDeEle", fields: ["IDelement", "Tenelement", "Loai"])
+    @key(name: "cateExEle", fields: ["IDelement", "Tenelement", "Loai"]) {
+    IDelement: Int!
+    Tenelement: String
+    Loai: String
+    storage: String
+    Luottruycap: Int
+    IDuser: user @connection
+    NgayDang: AWSDateTime!
+    LienKet: String!
+    Tag: [tag] @connection(keyName: "tagElement", fields: ["IDelement"])
+    Sothich: [sothich]
+        @connection(keyName: "prefElement", fields: ["IDelement"])
+}
+
+type INcourse @model {
+    IDcourse: Course @connection
+    IDbaihoc: [baihoc]
+        @connection(keyName: "INcourseBaihoc", fields: ["IDcourse"])
+    IDroot: Int
+    Tenbhoc: String
+}
+
+type account @model {
+    IDuser: user @connection
+    Email: String!
+    Tk: String!
+    Mk: String!
+}
+
+type baihoc @model @key(name: "INcourseBaihoc", fields: ["IDelement"]) {
+    IDbaihoc: [Int]
+    IDelement: [Element] @connection(keyName: "baihocEle", fields: ["IDbaihoc"])
+}
+
+type category @model {
+    IDcategory: Int!
+    Ten: String!
+    IDroot: Int
+    IDexample: Element @connection(keyName: "cateExEle", fields: ["IDcategory"])
+    IDdefinition: Element
+        @connection(keyName: "cateDeEle", fields: ["IDcategory"])
+}
+
+type ratingBaiHoc @model {
+    IDuser: user @connection
+    IDbidanhgia: baihoc @connection
+    IDcmt: Int!
+    IDrootcmt: Int
+    BinhLuan: String
+    Diem: Int
+    Like: Int
+    Ngay: AWSDateTime!
+}
+
+type ratingCourse @model {
+    IDuser: user @connection
+    IDbidanhgia: Course @connection
+    IDcmt: Int!
+    IDrootcmt: Int
+    BinhLuan: String
+    Diem: Int
+    Like: Int
+    Ngay: AWSDateTime!
+}
+
+type ratingElement @model {
+    IDuser: user @connection
+    IDbidanhgia: Element @connection
+    IDcmt: Int!
+    IDrootcmt: Int
+    BinhLuan: String
+    Diem: Int
+    Like: Int
+    Ngay: AWSDateTime!
+}
+
+type sothich
+    @model
+    @key(name: "preference", fields: ["Sothich", "Mota"])
+    @key(name: "prefElement", fields: ["Sothich", "Mota"]) {
+    IDsothich: Int!
+    Sothich: String!
+    Mota: String
+}
+
+type tag
+    @model
+    @key(name: "tagCourse", fields: ["Tag", "Popular"])
+    @key(name: "tagElement", fields: ["Tag", "Popular"]) {
+    IDTag: Int!
+    Tag: String!
+    Popular: Int
+}
+
+type tao_hay_hoc @model {
+    IDuser: user @connection
+    IDcourse: [Course] @connection(keyName: "taohoc", fields: ["IDuser"])
+    TienTrinh: Float
+    Tao_Hoc: Int!
+}
+
+type user @model {
+    IDuser: Int!
+    Tenuser: String!
+    Sothich: [sothich] @connection(keyName: "preference", fields: [IDuser])
+    Sodt: Int
+    Diachi: String
+    GioiTinh: Boolean
+}
+>>>>>>> b9156e94edabba0446f51c6c66926056136b901d
