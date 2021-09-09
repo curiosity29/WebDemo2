@@ -8,7 +8,7 @@ export default class KnowledgePage extends React.Component {
             error: null,
             isLoaded: false,
             result: [],
-            data : " "
+            data: " "
         };
         this.componentDidMount();
     }
@@ -59,7 +59,7 @@ export default class KnowledgePage extends React.Component {
         })
     }
     render() {
-        const { error, isLoaded, result , data} = this.state;
+        const { error, isLoaded, result, data } = this.state;
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
@@ -72,6 +72,7 @@ export default class KnowledgePage extends React.Component {
                         placeholder="preference"
                         name={data}
                     />
+                    <button onClick={() => window.location.reload(false)}>Change preference</button>
                     {result.map(item =>
                         <div className="border">
                             <div>{item.name}</div>
