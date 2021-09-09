@@ -70,7 +70,7 @@ export default class KnowledgePage extends React.Component {
                     <input
                         onChange={this.handleChange}
                         placeholder="preference"
-                        value={data}
+                        name={data}
                     />
                     {result.map(item =>
                         <div className="border">

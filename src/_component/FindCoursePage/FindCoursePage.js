@@ -62,6 +62,7 @@ export default class FindCoursePage extends React.Component {
         const { name, value } = e.target;
         this.setState({ [name]: value });
     }
+
     render() {
         const { error, isLoaded, q, result, data } = this.state;
         if (error) {
@@ -74,9 +75,9 @@ export default class FindCoursePage extends React.Component {
                     <input
                         onChange={this.handleChange}
                         placeholder="Name course"
-                        value={data}
+                        name={data}
                     />
-                    <button> Search</button> {/* search button de tim course */}
+                    <button> Search</button> {/* search button de tim course*/}
                     {result.map(item =>
                         <div className="border">
                             <div>{item.name}</div>
