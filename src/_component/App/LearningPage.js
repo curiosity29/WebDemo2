@@ -5,14 +5,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { CreateKnowledge, FetchKnowledge, SearchKnowLedge } from '../.././API'
 import { ConsoleLogger } from "@aws-amplify/core";
-
+import { SearchUserKnowLedge } from "../.././API";
 const initialFormState = {
     elementName: 'stupid name',
     type: 'stupid type',
   }
 
   
-  export default class KnowledgePage extends React.Component {
+  export default class LearningPage extends React.Component {
       formData;
       setFormData;
       constructor(props) {
@@ -67,6 +67,42 @@ const initialFormState = {
 
                             }
     }
+
+    searchKnowledge(preference)
+    {
+        if(!SearchKnowLedge(preference))
+                            {
+                                this.setState({
+                                    isLoaded: true,
+                                    result: []
+                                    }
+                                )
+                                console.log("if")
+                                return
+                            }
+                            else
+                            {
+                                console.log("else")
+                                SearchKnowLedge(preference)
+                                .then(
+                                    (result) => {
+                                        this.setState({
+                                            isLoaded: true,
+                                            result: result
+                                        });
+                                        console.log(this.state.result)
+                                    },
+                                    (error) => {
+                                        this.setState({
+                                            isLoaded: true,
+                                            error
+                                        });
+                                    }
+                                )
+
+                            }
+    }
+
     componentWillMount() {
     //     this.getKnowledgeList();
     // }
@@ -182,21 +218,14 @@ const initialFormState = {
             //console.log(result)
             return (
                 <div className="">
-                    <button onClick={this.CreateElement}>Create Knowledge</button>
 
                     <input
                         onChange={this.handleChange}
-                        placeholder="type"
+                        placeholder="preference"
                         value={this.eType}
                     />
 
-                    <input
-                        onChange={this.handleChange}
-                        placeholder="name"
-                        value={this.eName}
-                    />
-
-                    <button onClick={this.Find}>Find Knowledge</button>
+                    <button onClick={this.searchKnowledge}>Change preference</button>
                         
                         
                         

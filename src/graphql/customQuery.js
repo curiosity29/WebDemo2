@@ -29,3 +29,22 @@ query FilterKnowledge(
     }
 }
 `;
+
+export const UserKnowledge = /* GraphQL */ `
+query userKnowledge(
+    $preference: Preference
+    ) 
+    getKnowledge 
+        (
+            preference: $preference
+        ) 
+    {
+    Knowledge(
+        where Knowledge.preference == preference
+    )
+        {
+            elementName
+            type
+        }
+
+`
