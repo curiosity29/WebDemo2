@@ -5,14 +5,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { CreateKnowledge, FetchKnowledge, SearchKnowLedge } from '../.././API'
 import { ConsoleLogger } from "@aws-amplify/core";
-
+import { SearchUserKnowLedge } from "../.././API";
 const initialFormState = {
     elementName: 'stupid name',
     type: 'stupid type',
   }
 
   
-  export default class KnowledgePage extends React.Component {
+  export default class LearningPage extends React.Component {
       formData;
       setFormData;
       constructor(props) {
@@ -29,9 +29,8 @@ const initialFormState = {
     }
     async CreateElement()
     {
-
-        CreateKnowledge({elementName: this.eName.value, type: this.eType.value})
-        //CreateKnowledge({elementName: "vl", type: "luon"})
+        //CreateKnowledge({elementName: this.eName.value, type: this.eType.value})
+        CreateKnowledge({elementName: "vl", type: "luon"})
     }
 
     Find()
@@ -68,59 +67,45 @@ const initialFormState = {
 
                             }
     }
+
+    searchKnowledge(preference)
+    {
+        if(!SearchKnowLedge(preference))
+                            {
+                                this.setState({
+                                    isLoaded: true,
+                                    result: []
+                                    }
+                                )
+                                console.log("if")
+                                return
+                            }
+                            else
+                            {
+                                console.log("else")
+                                SearchKnowLedge(preference)
+                                .then(
+                                    (result) => {
+                                        this.setState({
+                                            isLoaded: true,
+                                            result: result
+                                        });
+                                        console.log(this.state.result)
+                                    },
+                                    (error) => {
+                                        this.setState({
+                                            isLoaded: true,
+                                            error
+                                        });
+                                    }
+                                )
+
+                            }
+    }
+
+    // get current knowledge from course
     componentWillMount() {
-    //     this.getKnowledgeList();
-    // }
-    // async getKnowledgeList() {
-        // CreateKnowledge({
-        //     elementName: '1',
-        //     type: '1',
-        //     Date: '1',
-        //     rating: '1',
-        //     UserID: '1'
-        //   })
-
-
-        // fetch("https://api.example.com/items")
-        //     .then(res => res.json())
-        //     .then(
-        //         (result) => {
-        //             this.setState({
-        //                 isLoaded: true,
-        //                 result: result
-        //             });
-        //         },
-        //         (error) => {
-        //             this.setState({
-        //                 isLoaded: true,
-        //                 error
-        //             });
-        //         }
-        //     )
-        // this.setState({
-            //     isLoaded: true,
-            //     result: [{
-                //         name: "Nam",
-                //         content: "Nhu qq",
-                //         tag: "Gay boy",
-                //         Type: "Word",
-                //         Rating: {
-                    //             like: 150,
-                    //             hate: 23,
-                    //         },
-                    //         Link: "/sadas/sadas/sadas",
-                    //     }, {
-                        //         name: "Nam1",
-                        //         content: "Nhu qq1",
-                        //         tag: "Gay boy1",
-                        //         Type: "Word1",
-                        //         Rating: {
-                            //             like: 1501,
-                            //             hate: 231,
-                            //         },
-                            //         Link: "/sadas/sadas/sadas1",
-                            //     }]
-                            // })
+    
                             if(!FetchKnowledge())
                             {
                                 this.setState({
@@ -156,7 +141,7 @@ const initialFormState = {
         console.log(this.state.result)
     }
     render() {
-        const { error, isLoaded, result, data } = this.state;
+        const { error, isLoaded, result , data} = this.state;
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
@@ -183,21 +168,14 @@ const initialFormState = {
             //console.log(result)
             return (
                 <div className="">
-                    <button onClick={this.CreateElement}>Create Knowledge</button>
 
                     <input
                         onChange={this.handleChange}
-                        placeholder="type"
+                        placeholder="preference"
                         value={this.eType}
                     />
 
-                    <input
-                        onChange={this.handleChange}
-                        placeholder="name"
-                        value={this.eName}
-                    />
-
-                    <button onClick={this.Find}>Find Knowledge</button>
+                    <button onClick={this.searchKnowledge}>Change preference</button>
                         
                         
                         

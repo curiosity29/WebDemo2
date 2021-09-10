@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { history } from "../../_helpers/history";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { CreateKnowledge, FetchKnowledge, SearchKnowLedge } from '../.././API'
+import { CreateKnowledge, FetchKnowledge, SearchKnowLedge } from '../../API'
 import { ConsoleLogger } from "@aws-amplify/core";
 
 const initialFormState = {
@@ -12,7 +12,7 @@ const initialFormState = {
   }
 
   
-  export default class KnowledgePage extends React.Component {
+  export default class CreateCourse extends React.Component {
       formData;
       setFormData;
       constructor(props) {
