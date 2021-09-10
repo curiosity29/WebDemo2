@@ -103,59 +103,9 @@ const initialFormState = {
                             }
     }
 
+    // get current knowledge from course
     componentWillMount() {
-    //     this.getKnowledgeList();
-    // }
-    // async getKnowledgeList() {
-        // CreateKnowledge({
-        //     elementName: '1',
-        //     type: '1',
-        //     Date: '1',
-        //     rating: '1',
-        //     UserID: '1'
-        //   })
-
-
-        // fetch("https://api.example.com/items")
-        //     .then(res => res.json())
-        //     .then(
-        //         (result) => {
-        //             this.setState({
-        //                 isLoaded: true,
-        //                 result: result
-        //             });
-        //         },
-        //         (error) => {
-        //             this.setState({
-        //                 isLoaded: true,
-        //                 error
-        //             });
-        //         }
-        //     )
-        // this.setState({
-            //     isLoaded: true,
-            //     result: [{
-                //         name: "Nam",
-                //         content: "Nhu qq",
-                //         tag: "Gay boy",
-                //         Type: "Word",
-                //         Rating: {
-                    //             like: 150,
-                    //             hate: 23,
-                    //         },
-                    //         Link: "/sadas/sadas/sadas",
-                    //     }, {
-                        //         name: "Nam1",
-                        //         content: "Nhu qq1",
-                        //         tag: "Gay boy1",
-                        //         Type: "Word1",
-                        //         Rating: {
-                            //             like: 1501,
-                            //             hate: 231,
-                            //         },
-                            //         Link: "/sadas/sadas/sadas1",
-                            //     }]
-                            // })
+    
                             if(!FetchKnowledge())
                             {
                                 this.setState({

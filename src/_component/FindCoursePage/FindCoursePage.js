@@ -77,7 +77,7 @@ export default class FindCoursePage extends React.Component {
                         placeholder="Name course"
                         name={data}
                     />
-                    <button> Search</button> {/* search button de tim course*/}
+                    <button onClick={() => window.location.reload(false)}> Search</button> {/* search button de tim course*/}
                     {result.map(item =>
                         <div className="border">
                             <div>{item.name}</div>

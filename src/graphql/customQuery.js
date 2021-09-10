@@ -48,3 +48,4 @@ query userKnowledge(
         }
 
 `
+

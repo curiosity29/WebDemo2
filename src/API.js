@@ -46,8 +46,11 @@ async function SearchUserKnowLedge(inputData){
     return stuffFromAPI;
 }
 
-
-
+async function GetCurrentKnowledge(inputData){
+    const apiData = await API.graphql({ query: UserKnowledge, variables: { input: { inputData } } });
+    const stuffFromAPI = apiData.data.listKnowledges.items;
+    return stuffFromAPI;
+}
 
 
 //#endregion 

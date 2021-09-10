@@ -155,7 +155,7 @@ const initialFormState = {
         console.log(this.state.result)
     }
     render() {
-        const { error, isLoaded, result , data} = this.state;
+        const { error, isLoaded, result, data } = this.state;
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
