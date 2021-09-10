@@ -6,6 +6,7 @@ import CreateKnowledgePage from "../CreateKnowledgePage/CreateKnowledgePage";
 import FindCoursePage from "../FindCoursePage/FindCoursePage";
 import KnowledgePage from "../KnowledgePage/KnowledgePage";
 import LearningPage from "./LearningPage";
+import CreateCoursePage from "./CreateCoursePage";
 export default class App extends React.Component {
     render() {
         return (
@@ -13,7 +14,7 @@ export default class App extends React.Component {
                 <Router>
                     <div variant="header">
                         <Link to="/knowledge" className="">Find knowledge</Link>
-                        <Link to="/createCourse" >Create course</Link>
+                        <Link to="/CreateCourse" >Create course</Link>
                         <Link to="/findCourse" >Find course</Link>
                         <Link to="/createKnowledge" >Create Knowledge</Link>
                         <Link to="/myCourse"> My course</Link>
@@ -34,6 +35,7 @@ export default class App extends React.Component {
                             <Route path="/LearningPage">
                                 <LearningPage/>
                             </Route>
+
                         </Switch>
                     </div>
                 </Router>
